@@ -6,6 +6,7 @@ import com.Main.Entity.Note;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 public class DerbyNoteDaoTests {
@@ -92,8 +93,10 @@ public class DerbyNoteDaoTests {
         {
             dnd = new DerbyNoteDao("test4");
             int id =dnd.addNote("aaa");
-            dnd.updateNote(id+1, "bbb");
-            Assert.assertEquals(dnd.getNote(id).getNote(), "aaa");
+            Date updated = dnd.getNote(id).getUpdated();
+            dnd.updateNote(id, "bbb");
+            Date d2 = dnd.getNote(id).getUpdated();
+            Assert.assertTrue(updated.before(dnd.getNote(id).getUpdated()));
         }
         catch(Exception e)
         {
