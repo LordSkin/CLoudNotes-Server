@@ -1,46 +1,7 @@
 ----------------------------------------------------------------
-Fri Jul 21 11:16:44 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-015d-646f-540a-00000d3b8240 
-on database directory C:\Users\A671811\Desktop\CloudNotes\Server\test1  with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/C:/Users/A671811/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_131-b11
-user.dir=C:\Users\A671811\Desktop\CloudNotes\Server
-os.name=Windows 7
-os.arch=amd64
-os.version=6.1
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Fri Jul 21 11:16:45 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance 81260031-015d-646f-540a-00000d3b8240 
-on database directory C:\Users\A671811\Desktop\CloudNotes\Server\test4  with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/C:/Users/A671811/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_131-b11
-user.dir=C:\Users\A671811\Desktop\CloudNotes\Server
-os.name=Windows 7
-os.arch=amd64
-os.version=6.1
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Fri Jul 21 11:16:45 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance 82080041-015d-646f-540a-00000d3b8240 
-on database directory C:\Users\A671811\Desktop\CloudNotes\Server\test3  with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/C:/Users/A671811/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_131-b11
-user.dir=C:\Users\A671811\Desktop\CloudNotes\Server
-os.name=Windows 7
-os.arch=amd64
-os.version=6.1
-derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Fri Jul 21 11:16:45 CEST 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a352c053-015d-646f-540a-00000d3b8240 
-on database directory C:\Users\A671811\Desktop\CloudNotes\Server\test2  with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Wed Jul 26 12:16:47 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-015d-7e66-1b90-000007a53238 
+on database directory C:\Users\A671811\Desktop\CloudNotes\Server\dataBase  with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
 Loaded from file:/C:/Users/A671811/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_131-b11

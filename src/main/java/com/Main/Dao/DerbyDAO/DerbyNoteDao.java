@@ -18,7 +18,19 @@ public class DerbyNoteDao implements NoteDao {
 
     public DerbyNoteDao()
     {
-        new DerbyNoteDao("dataBase");
+
+        try
+        {
+            DataBaseConnector.connectToDataBase("dataBase");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            statement = DataBaseConnector.getStatement();
+        }
     }
 
     public DerbyNoteDao(String dataBaseName) {
@@ -30,7 +42,11 @@ public class DerbyNoteDao implements NoteDao {
         {
             e.printStackTrace();
         }
-        statement = DataBaseConnector.getStatement();
+        finally
+        {
+            statement = DataBaseConnector.getStatement();
+        }
+
     }
 
     @Override
