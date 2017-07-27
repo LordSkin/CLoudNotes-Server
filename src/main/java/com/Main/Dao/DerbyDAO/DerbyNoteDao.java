@@ -51,10 +51,12 @@ public class DerbyNoteDao implements NoteDao {
 
     @Override
     public List<Note> getNotes() {
+        ResultSet re=null;
         try
         {
-            ResultSet re = statement.executeQuery("SELECT * FROM Notes");
+            re = statement.executeQuery("SELECT * FROM Notes");
             LinkedList<Note> result = new LinkedList<Note>();
+            re.beforeFirst();
             while(re.next())
             {
                 result.add(new Note(new Date(re.getLong("created")), new Date(re.getLong("updated")), re.getString("note")));
@@ -66,14 +68,26 @@ public class DerbyNoteDao implements NoteDao {
             e.printStackTrace();
             return new LinkedList<Note>();
         }
+        finally
+        {
+            try
+            {
+                if(re!=null)re.close();
+            }
+            catch (java.sql.SQLException e)
+            {
+            }
+
+        }
     }
 
     @Override
     public Note getNote(int id) {
+        ResultSet re = null;
         try
         {
-            ResultSet re = statement.executeQuery("SELECT * FROM Notes WHERE id = "+id);
-            re.next();
+            re = statement.executeQuery("SELECT * FROM Notes WHERE id = "+id);
+            re.first();
             return new Note(new Date(re.getLong("created")), new Date(re.getLong("updated")), re.getString("note"));
         }
         catch(java.sql.SQLException e)
@@ -81,27 +95,59 @@ public class DerbyNoteDao implements NoteDao {
             //e.printStackTrace();
             return null;
         }
+        finally
+        {
+            try
+            {
+                if(re!=null)re.close();
+            }
+            catch (java.sql.SQLException e)
+            {
+            }
+
+        }
     }
 
     @Override
     public int addNote(String note) {
+        ResultSet re = null;
         try
         {
-            ResultSet re = statement.executeQuery("SELECT id FROM Notes");
-            int counter = size(re)+1;
+            re = statement.executeQuery("SELECT * FROM Notes");
+            int counter;
+            if(re.last())
+            {
+                counter = re.getInt("id")+1;
+            }
+            else
+            {
+                counter = 0;
+            }
+            re.close();
             Note n = new Note(note);
             String s = "insert into Notes values("+counter+",'"+n.getNote()+"','"+n.getCreated().getTime()+"','"+n.getUpdated().getTime()+"')";
             statement.executeUpdate("insert into Notes values("+counter+",'"+n.getNote()+"',"+n.getCreated().getTime()+","+n.getUpdated().getTime()+")");
             return counter;
         }
-        catch(java.sql.SQLException e)
+        catch(Exception e)
         {
             e.printStackTrace();
             return -1;
         }
+        finally
+        {
+            try
+            {
+                if(re!=null)re.close();
+            }
+            catch (java.sql.SQLException e)
+            {
+            }
+
+        }
     }
 
-    private int size(ResultSet rs)
+    private int size(ResultSet rs) throws Exception
     {
         try
         {
@@ -112,7 +158,7 @@ public class DerbyNoteDao implements NoteDao {
         catch (Exception e)
         {
             e.printStackTrace();
-            return -1;
+            throw new Exception("cant get size of notes list");
         }
 
     }
@@ -132,13 +178,15 @@ public class DerbyNoteDao implements NoteDao {
             e.printStackTrace();
             return false;
         }
+
     }
 
     @Override
     public boolean updateNote(int id, String noteText) {
+        ResultSet re = null;
         try
         {
-            ResultSet re = statement.executeQuery("SELECT * FROM Notes WHERE id = "+id);
+            re = statement.executeQuery("SELECT * FROM Notes WHERE id = "+id);
             re.first();
             Note note = new Note(new Date(re.getLong("created")), Date.from(Instant.now()), noteText);
             int result =statement.executeUpdate("UPDATE Notes SET note = '"+note.getNote()+"', updated ="+note.getUpdated().getTime()+" WHERE id = "+id);
@@ -150,14 +198,25 @@ public class DerbyNoteDao implements NoteDao {
             System.out.println("Proba zaktualizowania nieistniejacej notatki!");
             return false;
         }
+        finally
+        {
+            try
+            {
+                if(re!=null)re.close();
+            }
+            catch (java.sql.SQLException e)
+            {
+            }
+
+        }
     }
 
     @Override
     public void deleteAll() {
         try
         {
-            ResultSet re = statement.executeQuery("Drop Table Notes");
-
+            statement.executeUpdate("Drop Table Notes");
+            statement.executeUpdate("Create table Notes (id int primary key, note varchar(500), created bigint, updated bigint)");
         }
         catch(java.sql.SQLException e)
         {
@@ -167,15 +226,27 @@ public class DerbyNoteDao implements NoteDao {
 
     @Override
     public int size() {
+        ResultSet re = null;
         try
         {
-            ResultSet re = statement.executeQuery("SELECT id FROM Notes");
+            re = statement.executeQuery("SELECT id FROM Notes");
             return size(re);
         }
         catch (Exception e)
         {
             e.printStackTrace();
             return -1;
+        }
+        finally
+        {
+            try
+            {
+                if(re!=null)re.close();
+            }
+            catch (java.sql.SQLException e)
+            {
+            }
+
         }
 
     }

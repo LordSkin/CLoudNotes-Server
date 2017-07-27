@@ -46,7 +46,7 @@ public class NotesController {
         return result;
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteNote(@PathVariable("id") int id)
     {
        if(notesService.deleteNote(id))
@@ -70,5 +70,12 @@ public class NotesController {
         {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteAll()
+    {
+        notesService.deelteAll();
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }

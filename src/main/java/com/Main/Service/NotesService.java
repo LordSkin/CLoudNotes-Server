@@ -40,4 +40,9 @@ public class NotesService {
     {
         return noteDao.updateNote(id, text);
     }
+
+    public void deelteAll()
+    {
+        noteDao.deleteAll();
+    }
 }

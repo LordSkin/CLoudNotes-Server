@@ -34,15 +34,17 @@ public class DataBaseConnector {
         {
             String dbUrl = "jdbc:derby:.\\"+name+";create=false";
             connection = DriverManager.getConnection(dbUrl);
+            connection.setAutoCommit(true);
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         }
         catch(java.sql.SQLException excception)
         {
             String dbUrl = "jdbc:derby:.\\"+name+";create=true";
             connection = DriverManager.getConnection(dbUrl);
-            connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            connection.setAutoCommit(true);
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            statement.executeUpdate("Create table Notes (id int primary key, note varchar(500), created bigint, updated bigint)");
+            statement.execute("Create table Notes (id int primary key, note varchar(500), created bigint, updated bigint)");
+            connection.commit();
         }
     }
 }
