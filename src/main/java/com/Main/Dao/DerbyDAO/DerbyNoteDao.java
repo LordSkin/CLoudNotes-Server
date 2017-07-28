@@ -59,7 +59,7 @@ public class DerbyNoteDao implements NoteDao {
             re.beforeFirst();
             while(re.next())
             {
-                result.add(new Note(new Date(re.getLong("created")), new Date(re.getLong("updated")), re.getString("note")));
+                result.add(new Note(new Date(re.getLong("created")), new Date(re.getLong("updated")), re.getString("note"), re.getInt("id")));
             }
             return result;
         }
@@ -88,7 +88,7 @@ public class DerbyNoteDao implements NoteDao {
         {
             re = statement.executeQuery("SELECT * FROM Notes WHERE id = "+id);
             re.first();
-            return new Note(new Date(re.getLong("created")), new Date(re.getLong("updated")), re.getString("note"));
+            return new Note(new Date(re.getLong("created")), new Date(re.getLong("updated")), re.getString("note"), re.getInt("id"));
         }
         catch(java.sql.SQLException e)
         {
@@ -124,7 +124,7 @@ public class DerbyNoteDao implements NoteDao {
                 counter = 0;
             }
             re.close();
-            Note n = new Note(note);
+            Note n = new Note(note, counter);
             String s = "insert into Notes values("+counter+",'"+n.getNote()+"','"+n.getCreated().getTime()+"','"+n.getUpdated().getTime()+"')";
             statement.executeUpdate("insert into Notes values("+counter+",'"+n.getNote()+"',"+n.getCreated().getTime()+","+n.getUpdated().getTime()+")");
             return counter;
@@ -188,7 +188,7 @@ public class DerbyNoteDao implements NoteDao {
         {
             re = statement.executeQuery("SELECT * FROM Notes WHERE id = "+id);
             re.first();
-            Note note = new Note(new Date(re.getLong("created")), Date.from(Instant.now()), noteText);
+            Note note = new Note(new Date(re.getLong("created")), Date.from(Instant.now()), noteText, id);
             int result =statement.executeUpdate("UPDATE Notes SET note = '"+note.getNote()+"', updated ="+note.getUpdated().getTime()+" WHERE id = "+id);
             if (result>0) return true;
             else return false;

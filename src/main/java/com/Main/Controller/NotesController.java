@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +21,10 @@ public class NotesController {
     private NotesService notesService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Note> getAllNotes()
+    public ResponseEntity<List<Note>> getAllNotes()
     {
-        return notesService.getNotes();
+        ArrayList<Note> notes = new ArrayList<Note>(notesService.getNotes());
+        return new ResponseEntity<List<Note>>(notes, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

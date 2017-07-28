@@ -10,9 +10,9 @@ public class FakeDao implements NoteDao {
 
     public FakeDao() {
         notes = new ArrayList<Note>();
-        notes.add(new Note("notatka 1"));
-        notes.add(new Note("notatka 2"));
-        notes.add(new Note("notatka 3"));
+        notes.add(new Note("notatka 1",0));
+        notes.add(new Note("notatka 2",1));
+        notes.add(new Note("notatka 3",2));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class FakeDao implements NoteDao {
     @Override
     public int addNote(String note)
     {
-         notes.add(new Note(note));
+         notes.add(new Note(note,0));
          return notes.size()-1;
     }
 

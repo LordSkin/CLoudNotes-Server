@@ -11,22 +11,29 @@ public class Note {
     private Date created;
     private Date updated;
     private String note;
+    private int id;
 
-    public Note(Date created, Date updated, String note) {
+    public Note(Date created, Date updated, String note, int id) {
         this.created = created;
         this.updated = updated;
         this.note = note;
+        this.id = id;
     }
 
-    public Note() {
+    public Note(int id) {
         created = Date.from(Instant.now());
         updated = Date.from(Instant.now());
     }
 
-    public Note(String note) {
+    public Note(String note, int id) {
         this.note = note;
         created = Date.from(Instant.now());
         updated = Date.from(Instant.now());
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNote() {
@@ -61,6 +68,6 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Utworzona:"+this.created+", edytowana:"+updated+", tresc:"+note;
+        return "ID: "+id+ " Utworzona:"+this.created+", edytowana:"+updated+", tresc:"+note;
     }
 }
