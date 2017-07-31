@@ -15,15 +15,31 @@ import java.util.List;
 public class NotesService {
     @Autowired
     private NoteDao noteDao;
+    private Note weatherNote;
+
+    public void setWeatherNote(String note)
+    {
+        this.weatherNote = Note.addWeather(note);
+    }
 
     public List<Note> getNotes()
     {
-        return noteDao.getNotes();
+        List<Note> result = noteDao.getNotes();
+        result.add(0, weatherNote);
+        return result;
     }
 
     public Note getNote(int id)
     {
-        return noteDao.getNote(id);
+        if(id==Note.WEATHER_NOTE_ID)
+        {
+            return weatherNote;
+        }
+        else
+        {
+            return noteDao.getNote(id);
+        }
+
     }
 
     public int addNote(String note)
