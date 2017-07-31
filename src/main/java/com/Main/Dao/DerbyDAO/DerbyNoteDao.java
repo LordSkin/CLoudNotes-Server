@@ -168,7 +168,7 @@ public class DerbyNoteDao implements NoteDao {
     public boolean removeNote(int id) {
         try
         {
-            int result =statement.executeUpdate("Delete from Note Where id ="+id);
+            int result =statement.executeUpdate("Delete from Notes Where id ="+id);
             if(result>0) return true;
             else return false;
 
